@@ -21,6 +21,7 @@ class ShowController{
             res.status(201).json(newShow)
 
         } catch (error) {
+            console.error(error)
             res.status(500).json({Error: `Error - ${error}`})
         }
     }
@@ -51,6 +52,16 @@ class ShowController{
             }
         } catch(error){
             res.status(500).json({Error: `Oops something went wrong - ${error}`})
+        }
+    }
+
+    static async deleteShow(req,res){
+        const {id} = req.params
+        try{
+            await Show.deleteShow(id)
+            res.status(204).end()
+        } catch(error){
+            res.status(500).json({Error: `Error code - ${error}`})
         }
     }
 
